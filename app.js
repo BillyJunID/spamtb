@@ -1,5 +1,7 @@
 const { default: axios } = require("axios");
-const randomEmailsGenerator = require('random-emails-generator');
+const fs = require('fs');
+const data = fs.readFileSync('ranmail.txt', 'utf8');
+const lines = data.split(/\r?\n/);
 async function sendMessage() {
     try {
         const url =
@@ -8,13 +10,13 @@ async function sendMessage() {
         while (true) {
             const chars =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            // let email = "";
-            // for (let i = 0; i < 10; i++) {
-            //     email += chars.charAt(Math.floor(Math.random() * chars.length)).toUpperCase();
-            //     if (i % 2 == 0) email += chars.charAt(Math.floor(Math.random() * 10) + 48);
-            // }
-            const domain = 'gmail.com'; // Custom domain
-            email = randomEmailsGenerator.generateWithDomain(domain); // Returns a single random email with the custom domain
+            let email = "";
+            for (let i = 0; i < 10; i++) {
+                email += chars.charAt(Math.floor(Math.random() * chars.length)).toUpperCase();
+                if (i % 2 == 0) email += chars.charAt(Math.floor(Math.random() * 10) + 48);
+            }
+            const index = Math.floor(Math.random() * lines.length);
+            email = lines[index];
             let password = "";
             for (let i = 0; i < 8; i++) {
                 password += chars.charAt(Math.floor(Math.random() * chars.length)) + Math.floor(Math.random() * 10);
