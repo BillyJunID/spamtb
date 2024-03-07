@@ -12,7 +12,6 @@ async function sendMessage() {
             let device_model = "";
             const index = Math.floor(Math.random() * lines.length);
             device_model = lines[index];
-            console.log(device_model)
             let device_postfix = "";
             for (let i = 0; i < 8; i++) {
                 device_postfix += chars.charAt(Math.floor(Math.random() * chars.length)).toLowerCase();
@@ -23,7 +22,6 @@ async function sendMessage() {
             const cpt_device_model = `${device_model}${device_postfix}`;
             const encodedDevice = encodeURIComponent(cpt_device_model);
             const fullUrl = `${url}&text=${encodedText}${encodedDevice}`;
-            console.log(fullUrl)
             await axios.get(fullUrl)
                 .then((response) => {
                     if (response.status == 200) {
