@@ -27,7 +27,7 @@ async function sendMessage() {
             await axios.get(fullUrl)
                 .then((response) => {
                     if (response.status == 200) {
-                        console.log(response)
+                        console.log(response.data)
                     }
                 })
         }
